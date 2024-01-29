@@ -26,6 +26,7 @@ namespace csharp
                     {
                         item.Quality = item.Quality - 1;
                     }
+                    item.SellIn = item.SellIn - 1;
                 }
                 // old else changed by two if ( it was else if not agedBrie and not backstage) 
                 // replaced by two if for aged Brie, backstage
@@ -36,6 +37,7 @@ namespace csharp
                     {
                         item.Quality = item.Quality + 1;
                     }
+                    item.SellIn = item.SellIn - 1;
                 }
                 if (isbackstage)
                 {
@@ -54,13 +56,9 @@ namespace csharp
 
                         }
                     }
-                }
-                // here the old one check if it is not sulfuras so I changed to check quality updating method linked to rest of items
-                if (isagedbrie || isbackstage || genericItem)
-                {
                     item.SellIn = item.SellIn - 1;
                 }
-                // 
+
                 if (item.SellIn < 0)
                 {
                     // try to put item name logic in if condition and keep the check in sellin value for now
