@@ -173,5 +173,31 @@ namespace csharp
             Assert.AreEqual(0, backstageItems[0].Quality);
         }
 
-    }
+        [Test]
+        public void Test_UpdateQuality_ConjuredItemWhenSellinMoreThan0()
+        {
+            // create conjured item with quality 15 and sell in 5 days
+            var conjuredItems = CreateItems("Conjured", 5, 15);
+            GildedRose gildedRose = GetGildedRose(conjuredItems);
+            gildedRose.UpdateQuality();
+
+
+            // Quality decrease by 2 
+            Assert.AreEqual(13, conjuredItems[0].Quality);
+        }
+
+        [Test]
+        public void Test_UpdateQuality_ConjuredItemWhenNegativeSellin()
+        {
+            // create conjured item with quality 15 and sell in 5 days
+            var conjuredItems = CreateItems("Conjured", -1, 15);
+            GildedRose gildedRose = GetGildedRose(conjuredItems);
+            gildedRose.UpdateQuality();
+
+
+            // Quality decrease by 4 
+            Assert.AreEqual(11, conjuredItems[0].Quality);
+        }
+
+     }
 }

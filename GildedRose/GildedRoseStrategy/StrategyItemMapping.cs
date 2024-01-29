@@ -13,7 +13,8 @@ namespace GildedRose.GildedRoseStrategy
              new Dictionary<string, IGildedRoseStrategy>(){
                 {"Aged Brie", new NormalIncreaseStrategy ()},
                 {"Backstage passes to a TAFKAL80ETC concert", new HybridIncreaseStrategy()},
-                {"Sulfuras, Hand of Ragnaros", new ConstantStrategy()}};
+                {"Sulfuras, Hand of Ragnaros", new ConstantStrategy()},
+                {"Conjured", new DoubleDecreaseStrategy()}};
 
     }
 }

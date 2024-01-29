@@ -32,3 +32,5 @@ Let's try to do refactoring for GildedRose-Refactoring-Kata in c#
    and to respect the open/close principle and now if we need to add item we need just to map with strategy or if needed to create new strategy
 
 Very Important : I didn't do any change in unit tests since the beginning and they still passed
+
+15- Add new item "Conjured" and new strategy linked no need to change the code we have just  to add the new strategy. 
