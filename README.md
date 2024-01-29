@@ -13,4 +13,5 @@ Let's try to do refactoring for GildedRose-Refactoring-Kata in c#
     - Second else block : it was else if not agedBrie and not backstage chenged by two if  for aged Brie, 	backstage the old behavior increase quality by 1 and check if backstage continue to increase.
     - third (if block) one check if it is not sulfuras so I changed to check quality updating method linked the 	rest of items.
     - last (if block) try to put item name logic in if condition and keep the check in sellin value for now
-8- put conditon linked to sell in (<0) under conditons by item name
+8- put conditon linked to sell in (<0) under conditons by item name.
+9- group the treatments linked to each item under the item name condition.
