@@ -18,3 +18,8 @@ Let's try to do refactoring for GildedRose-Refactoring-Kata in c#
 10- Create new methods to update quality and sell in values.
 11- put check in quality value ( should not be more than 50 and should not be negative) in updateQuality methode.
 12- Refact all name conditions to show system of update quality and to choose possible design pattern.
+13- add design pattern architecture to solution with 4 strategies to update quality : 
+	GenericDecreaseStrategy : normal items
+	NormalIncreaseStrategy : items like aged brie
+	HybridIncreaseStrategy : items like backstage
+	ConstantStrategy : items like sulfuras
