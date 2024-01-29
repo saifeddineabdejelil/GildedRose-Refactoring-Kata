@@ -59,29 +59,26 @@ namespace csharp
                     item.SellIn = item.SellIn - 1;
                 }
 
-                if (item.SellIn < 0)
+                // put conditon linked to sell in under conditons by item name
+                if (issulfuras || isbackstage || genericItem)
                 {
-                    // try to put item name logic in if condition and keep the check in sellin value for now
-                    if (issulfuras || isbackstage || genericItem)
+                    if (genericItem)
                     {
-                        if (genericItem)
+                        if (item.Quality > 0)
                         {
-                            if (item.Quality > 0)
-                            {
-                                item.Quality = item.Quality - 1;
-                            }
-                        }
-                        else if (isbackstage)
-                        {
-                            item.Quality = 0;
+                            if (item.SellIn < 0) item.Quality = item.Quality - 1;
                         }
                     }
-                    else if (isagedbrie)
+                    else if (isbackstage)
                     {
-                        if (item.Quality < 50)
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
+                        if (item.SellIn < 0) item.Quality = 0;
+                    }
+                }
+                else if (isagedbrie)
+                {
+                    if (item.Quality < 50)
+                    {
+                        if (item.SellIn < 0) item.Quality = item.Quality + 1;
                     }
                 }
             }
