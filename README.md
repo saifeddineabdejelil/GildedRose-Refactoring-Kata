@@ -3,3 +3,34 @@ Let's try to do refactoring for GildedRose-Refactoring-Kata in c#
 
 1-to copy of c# file from GildedRose-Refactoring-Kata repository.
 2- Push the original code in c# in the new repository.
+3- Create new branch called  refactGildedRose to work on it.
+4- Based on GildedRose Requirements Specification file : we create unit tests which test all cases. All tests passed ( green) with actual code. This step in very important to start refactoring after any change of code we will re run all tests and  they shoud all passed.
+5- Start refactoring of GildedRose class : add foreach to replace for and loop in element not with index : avoid using index when we call item.
+6- Cleanup if conditions : remove redudant condition and merge child if (without else ) with parent if.
+7- Start to change the logic of if conditions to be by item names and be sure that all tests still passed :
+    - create boolean variables to make conditions more readable.
+    - change first if condition put it by item not in (sulfuras, agedbrie, sulfuras) which decrease quantity when    	quality >0.
+    - Second else block : it was else if not agedBrie and not backstage chenged by two if  for aged Brie, 	backstage the old behavior increase quality by 1 and check if backstage continue to increase.
+    - third (if block) one check if it is not sulfuras so I changed to check quality updating method linked the 	rest of items.
+    - last (if block) try to put item name logic in if condition and keep the check in sellin value for now
+8- put conditon linked to sell in (<0) under conditons by item name.
+9- group the treatments linked to each item under the item name condition.
+10- Create new methods to update quality and sell in values.
+11- put check in quality value ( should not be more than 50 and should not be negative) in updateQuality methode.
+12- Refact all name conditions to show system of update quality and to choose possible design pattern.
+13- add design pattern architecture to solution with 4 strategies to update quality : 
+	GenericDecreaseStrategy : normal items
+	NormalIncreaseStrategy : items like aged brie
+	HybridIncreaseStrategy : items like backstage
+	ConstantStrategy : items like sulfuras
+   
+14- Copy the right code forach stratgy ( still no complete migration).
+15- Behavior migration to be linked to strategy pattern :
+	- add dictionnary to contain the mapping between item and strategy of quality update linked.
+	- put the new code in gildedrose class which check the strategy and execute the update.
+  I shoose that because here system based on bahvior/treatment,  linked to strategy of calculation not really to object.
+   and to respect the open/close principle and now if we need to add item we need just to map with strategy or if needed to create new strategy
+
+Very Important : I didn't do any change in unit tests since the beginning and they still passed
+
+15- Add new item "Conjured" and new strategy linked no need to change the code we have just  to add the new strategy. 
