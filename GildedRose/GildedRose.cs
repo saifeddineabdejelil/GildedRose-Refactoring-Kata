@@ -12,7 +12,7 @@ namespace csharp
 
         public void UpdateQuality()
         {
-            
+
             foreach (var item in Items)
             {
                 // group the treatments linked to each item under the item name condition
@@ -23,50 +23,39 @@ namespace csharp
                 var genericItem = !isagedbrie && !isbackstage && !issulfuras;
                 if (genericItem)
                 {
-                    if (item.Quality > 0)
-                    {
-                        item.Quality = UpdateQualityValue(item.Quality, -1);
-                    }
+                    item.Quality = UpdateQualityValue(item.Quality, -1);
+
                     item.SellIn = DecreaseSellinValue(item.SellIn);
-                    if (item.Quality > 0)
-                    {
-                        if (item.SellIn < 0) item.Quality = UpdateQualityValue(item.Quality, -1);
-                    }
+
+                    if (item.SellIn < 0) item.Quality = UpdateQualityValue(item.Quality, -1);
                 }
                 // here we need just to group treatments refactoring will be done after.
-                if (isagedbrie)
+                else if (isagedbrie)
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality = UpdateQualityValue(item.Quality, 1);
-                    }
+                    item.Quality = UpdateQualityValue(item.Quality, 1);
                     item.SellIn = DecreaseSellinValue(item.SellIn);
-                    if (item.Quality < 50)
-                    {
-                        if (item.SellIn < 0) item.Quality = UpdateQualityValue(item.Quality, 1); 
-                    }
+                    if (item.SellIn < 0) item.Quality = UpdateQualityValue(item.Quality, 1);
                 }
-                if (isbackstage)
+                else if (isbackstage)
                 {
-                    if (item.Quality < 50)
+                    item.Quality = UpdateQualityValue(item.Quality, 1);
+
+                    if (item.SellIn < 11)
+                    {
+                        item.Quality = UpdateQualityValue(item.Quality, 1);
+                    }
+
+                    if (item.SellIn < 6)
                     {
                         item.Quality = UpdateQualityValue(item.Quality, 1);
 
-                        if (item.SellIn < 11)
-                        {
-                            item.Quality = UpdateQualityValue(item.Quality, 1);
-                        }
-
-                        if (item.SellIn < 6)
-                        {
-                            item.Quality = UpdateQualityValue(item.Quality, 1);
-
-                        }
                     }
+                
                     item.SellIn = DecreaseSellinValue(item.SellIn);
                     if (item.SellIn < 0) item.Quality = 0;
                 }
-               
+                else return;
+
             }
         }
 
@@ -76,10 +65,13 @@ namespace csharp
             return sellinValue - 1;
         }
 
-        // Method to update quality value by value sent.
+        // Method to update quality value by value sent which include test linked to quality value
         private static int UpdateQualityValue(int qualityValue, int updateStep)
         {
-            return qualityValue + updateStep;
+            var updatedQualityValue = qualityValue + updateStep;
+            if (updatedQualityValue > 50) updatedQualityValue = 50;
+            else if (updatedQualityValue < 0) updatedQualityValue = 0;
+            return updatedQualityValue;
         }
     }
 }
