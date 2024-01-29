@@ -12,59 +12,73 @@ namespace csharp
 
         public void UpdateQuality()
         {
+            // try to put item name top in if conditions one by one
             foreach (var item in Items)
             {
-                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                // create boolean variables to make conditions more readable
+                var isagedbrie = item.Name == "Aged Brie";
+                var isbackstage = item.Name == "Backstage passes to a TAFKAL80ETC concert";
+                var issulfuras = item.Name == "Sulfuras, Hand of Ragnaros";
+                var genericItem = !isagedbrie && !isbackstage && !issulfuras;
+                if (genericItem) // first if condition decrease quantity when item not (sulfuras, agedbrie, sulfuras) and quality >0
                 {
-                    if (item.Quality > 0 && item.Name != "Sulfuras, Hand of Ragnaros")
+                    if (item.Quality > 0)
                     {
                         item.Quality = item.Quality - 1;
                     }
                 }
-                else
+                // old else changed by two if ( it was else if not agedBrie and not backstage) 
+                // replaced by two if for aged Brie, backstage
+                // the old behavior increase quality by 1 and check if backstage continue to increase
+                if (isagedbrie)
+                {
+                    if (item.Quality < 50)
+                    {
+                        item.Quality = item.Quality + 1;
+                    }
+                }
+                if (isbackstage)
                 {
                     if (item.Quality < 50)
                     {
                         item.Quality = item.Quality + 1;
 
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (item.SellIn < 11)
                         {
-                            if (item.SellIn < 11)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
+                            item.Quality = item.Quality + 1;
+                        }
 
-                            if (item.SellIn < 6)
-                            {
-                                item.Quality = item.Quality + 1;
+                        if (item.SellIn < 6)
+                        {
+                            item.Quality = item.Quality + 1;
 
-                            }
                         }
                     }
                 }
-
-                if (item.Name != "Sulfuras, Hand of Ragnaros")
+                // here the old one check if it is not sulfuras so I changed to check quality updating method linked to rest of items
+                if (isagedbrie || isbackstage || genericItem)
                 {
                     item.SellIn = item.SellIn - 1;
                 }
-
+                // 
                 if (item.SellIn < 0)
                 {
-                    if (item.Name != "Aged Brie")
+                    // try to put item name logic in if condition and keep the check in sellin value for now
+                    if (issulfuras || isbackstage || genericItem)
                     {
-                        if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (genericItem)
                         {
-                            if (item.Quality > 0 && item.Name != "Sulfuras, Hand of Ragnaros")
+                            if (item.Quality > 0)
                             {
                                 item.Quality = item.Quality - 1;
                             }
                         }
-                        else
+                        else if (isbackstage)
                         {
-                            item.Quality = item.Quality - item.Quality;
+                            item.Quality = 0;
                         }
                     }
-                    else
+                    else if (isagedbrie)
                     {
                         if (item.Quality < 50)
                         {
