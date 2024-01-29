@@ -12,7 +12,10 @@ namespace GildedRose.GildedRoseStrategy
     {
         public void UpdateQuality(Item item)
         {
-            throw new NotImplementedException();
+            item.Quality = item.SellIn > 0 ? Utilities.UpdateQualityValue(item.Quality, -1) :
+                    Utilities.UpdateQualityValue(item.Quality, -2);
+
+            item.SellIn = Utilities.DecreaseSellinValue(item.SellIn);
         }
     }
 }

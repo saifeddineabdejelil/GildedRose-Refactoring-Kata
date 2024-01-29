@@ -9,9 +9,7 @@ namespace csharp
         // to get list of items ( with 1 element ) from an item details
         private static List<Item> CreateItems(string name, int sellin, int quality)
         {
-            var items = new List<Item>();
             return new List<Item> { new Item { Name = name, SellIn = sellin, Quality = quality } };
-
         }
         // create gildedRose object from list of items
         private static GildedRose GetGildedRose(List<Item> listItems)

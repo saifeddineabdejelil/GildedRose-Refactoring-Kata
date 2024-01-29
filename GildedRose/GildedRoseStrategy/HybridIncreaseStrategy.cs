@@ -12,7 +12,23 @@ namespace GildedRose.GildedRoseStrategy
     {
         public void UpdateQuality(Item item)
         {
-            throw new NotImplementedException();
+            switch (item.SellIn)
+            {
+                case <= 0:
+                    item.Quality = 0;
+                    break;
+                case < 6:
+                    item.Quality = Utilities.UpdateQualityValue(item.Quality, 3);
+                    break;
+                case < 11:
+                    item.Quality = Utilities.UpdateQualityValue(item.Quality, 2);
+                    break;
+
+                default:
+                    item.Quality = Utilities.UpdateQualityValue(item.Quality, 1);
+                    break;
+            }
+            item.SellIn = Utilities.DecreaseSellinValue(item.SellIn);
         }
     }
 }

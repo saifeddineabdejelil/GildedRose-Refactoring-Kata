@@ -12,7 +12,7 @@ namespace GildedRose.GildedRoseStrategy
     {
         public void UpdateQuality(Item item)
         {
-            throw new NotImplementedException();
+            return;
         }
     }
 }

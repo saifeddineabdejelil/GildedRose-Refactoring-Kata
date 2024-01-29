@@ -23,3 +23,4 @@ Let's try to do refactoring for GildedRose-Refactoring-Kata in c#
 	NormalIncreaseStrategy : items like aged brie
 	HybridIncreaseStrategy : items like backstage
 	ConstantStrategy : items like sulfuras
+14- Copy the right code forach stratgy ( still no complete migration).
