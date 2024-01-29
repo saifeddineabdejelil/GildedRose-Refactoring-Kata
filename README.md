@@ -15,3 +15,4 @@ Let's try to do refactoring for GildedRose-Refactoring-Kata in c#
     - last (if block) try to put item name logic in if condition and keep the check in sellin value for now
 8- put conditon linked to sell in (<0) under conditons by item name.
 9- group the treatments linked to each item under the item name condition.
+10- Create new methods to update quality and sell in values.
