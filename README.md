@@ -23,4 +23,12 @@ Let's try to do refactoring for GildedRose-Refactoring-Kata in c#
 	NormalIncreaseStrategy : items like aged brie
 	HybridIncreaseStrategy : items like backstage
 	ConstantStrategy : items like sulfuras
+   
 14- Copy the right code forach stratgy ( still no complete migration).
+15- Behavior migration to be linked to strategy pattern :
+	- add dictionnary to contain the mapping between item and strategy of quality update linked.
+	- put the new code in gildedrose class which check the strategy and execute the update.
+  I shoose that because here system based on bahvior/treatment,  linked to strategy of calculation not really to object.
+   and to respect the open/close principle and now if we need to add item we need just to map with strategy or if needed to create new strategy
+
+Very Important : I didn't do any change in unit tests since the beginning and they still passed
