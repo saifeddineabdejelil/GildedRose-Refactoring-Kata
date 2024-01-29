@@ -16,4 +16,5 @@ Let's try to do refactoring for GildedRose-Refactoring-Kata in c#
 8- put conditon linked to sell in (<0) under conditons by item name.
 9- group the treatments linked to each item under the item name condition.
 10- Create new methods to update quality and sell in values.
-11- put check in quality value ( should not be more than 50 and should not be negative) in updateQuality methode
+11- put check in quality value ( should not be more than 50 and should not be negative) in updateQuality methode.
+12- Refact all name conditions to show system of update quality and to choose possible design pattern.

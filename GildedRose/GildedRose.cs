@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 
 namespace csharp
 {
@@ -15,45 +17,49 @@ namespace csharp
 
             foreach (var item in Items)
             {
-                // group the treatments linked to each item under the item name condition
-
                 var isagedbrie = item.Name == "Aged Brie";
                 var isbackstage = item.Name == "Backstage passes to a TAFKAL80ETC concert";
                 var issulfuras = item.Name == "Sulfuras, Hand of Ragnaros";
                 var genericItem = !isagedbrie && !isbackstage && !issulfuras;
                 if (genericItem)
                 {
-                    item.Quality = UpdateQualityValue(item.Quality, -1);
+                    // first system generic posetive sellin decrease quality by 1 ; 0 or negative sell in decrease quality by 2
+                    item.Quality = item.SellIn > 0 ? UpdateQualityValue(item.Quality, -1) :
+                     UpdateQualityValue(item.Quality, -2);
 
                     item.SellIn = DecreaseSellinValue(item.SellIn);
 
-                    if (item.SellIn < 0) item.Quality = UpdateQualityValue(item.Quality, -1);
                 }
-                // here we need just to group treatments refactoring will be done after.
                 else if (isagedbrie)
                 {
-                    item.Quality = UpdateQualityValue(item.Quality, 1);
+                    // item like aged brie update quality system : increase by on when sell in postive else increase by 2
+                    if (item.SellIn > 0) item.Quality = UpdateQualityValue(item.Quality, 1);
+                    else item.Quality = UpdateQualityValue(item.Quality, 2);
                     item.SellIn = DecreaseSellinValue(item.SellIn);
-                    if (item.SellIn < 0) item.Quality = UpdateQualityValue(item.Quality, 1);
                 }
                 else if (isbackstage)
                 {
-                    item.Quality = UpdateQualityValue(item.Quality, 1);
-
-                    if (item.SellIn < 11)
+                    // items like backstage have hybrid system to update quality.
+                    switch (item.SellIn)
                     {
-                        item.Quality = UpdateQualityValue(item.Quality, 1);
-                    }
+                        case <= 0:
+                            item.Quality = 0;
+                            break;
+                        case < 6:
+                            item.Quality = UpdateQualityValue(item.Quality, 3);
+                            break;
+                        case < 11:
+                            item.Quality = UpdateQualityValue(item.Quality, 2);
+                            break;
 
-                    if (item.SellIn < 6)
-                    {
-                        item.Quality = UpdateQualityValue(item.Quality, 1);
-
+                        default:
+                            item.Quality = UpdateQualityValue(item.Quality, 1);
+                            break;
                     }
-                
-                    item.SellIn = DecreaseSellinValue(item.SellIn);
-                    if (item.SellIn < 0) item.Quality = 0;
+                     item.SellIn = DecreaseSellinValue(item.SellIn);
+
                 }
+                // do nothing for items like sulfuras
                 else return;
 
             }
